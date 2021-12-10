@@ -1,0 +1,127 @@
+using System;
+using System.IO;
+
+namespace Modul_15
+{
+    class Program
+    {
+        static void Main(string[] args){
+            start :
+            Console.WriteLine(">>>==========================================<<<");
+            Console.WriteLine("    Selamat datang di sistem login sederhana   ");
+            Console.WriteLine(">>>==========================================<<<");
+            Console.WriteLine(" ");
+            Console.WriteLine("Sudah punya akun ? Jika belum, silahkan ketik R untuk pergi ke laman registrasi terlebih dahulu");
+            
+            string input1 = Console.ReadLine();    
+            if (input1 == "R"){
+                registerUser();
+            }
+            Console.WriteLine(" ");
+            loginUser();
+            
+            Console.WriteLine("Apakah anda masih ingin menggunakan aplikasi ");
+            string input2 = Console.ReadLine();
+            if (input2 == "y"){
+                goto start;
+            }
+            Console.WriteLine("================================================ ");
+            Console.WriteLine("|| Terimakasih telah menggunakan layanan kami || ");
+            Console.WriteLine("||          -By Faiz Hadi Maulana-            || ");
+            Console.WriteLine("================================================ ");
+            
+        }
+        static void registerUser(){
+            string userName;
+            string userPassword;
+            string lahir;
+            string nim;
+            string konsentrasi;
+
+            regis:
+            NAMA :
+            //NAMA USER
+            Console.WriteLine(" ");
+            Console.WriteLine("Siapa Nama Anda ?");
+            userName = Console.ReadLine();
+
+            string userName2 = "Nama : "+userName+"\n";
+            Console.WriteLine("Mohon konfirmasi nama anda (tulis kembali nama)");
+            string nameUser = Console.ReadLine();
+            if (nameUser != userName){
+                Console.WriteLine("Wah, kok ga sama seperti namanya yang diawal ? mohon input lagi ya");
+                goto NAMA;
+            }
+            //CEK JIKA SUDAH ADA PENGGUNA DENGAN NAMA TSB
+            if(File.Exists(nameUser+"data.txt")){
+                Console.WriteLine("Wah, Nama pengguna telah dipakai nih");
+                Console.WriteLine("Mohon gunakan ");
+                goto regis;
+            }
+            //PASSWORD USER
+            PASS :
+            Console.WriteLine(" ");
+            Console.WriteLine("Mohon buat password anda ");
+            userPassword = Console.ReadLine();
+
+            string userPassword2 = "Password : "+userPassword+"\n";  
+            Console.WriteLine("Mohon konfirmasi password anda (tulis kembali password)");
+            string passwordUser = Console.ReadLine();
+            if (passwordUser != userPassword){
+                Console.WriteLine("Wah, kok ga sama seperti password yang diawal ? mohon input lagi ya");
+                goto PASS;
+            }else if(passwordUser == nameUser){
+                Console.WriteLine("Lah, jangan samain password dengan username dong :3");
+                goto PASS;
+            }
+
+            //LAHIR SI USER
+            Console.WriteLine(" ");
+            Console.WriteLine("Tahun berapa anda lahir ?");
+            lahir = "TL : "+Console.ReadLine()+"\n";
+
+            //NIM USER
+            Console.WriteLine(" ");
+            Console.WriteLine("Masukkan NIM anda");
+            nim = "NIM : "+Console.ReadLine()+"\n";
+
+            //KONSENTRASI USER
+            Console.WriteLine(" ");
+            Console.WriteLine("Konsentrasi jurusan anda ?");
+            konsentrasi = "Konsentrasi : "+Console.ReadLine()+"\n";
+
+            File.WriteAllText(nameUser+"data.txt",userName2);
+            File.AppendAllText(nameUser+"data.txt",userPassword2);
+            File.AppendAllText(nameUser+"data.txt",lahir);
+            File.AppendAllText(nameUser+"data.txt",nim);
+            File.AppendAllText(nameUser+"data.txt",konsentrasi);
+        }
+        static void loginUser(){
+            login:
+            Console.WriteLine(" ");
+            Console.WriteLine("Username : ");
+            string userName = Console.ReadLine();
+
+            Console.WriteLine(" ");
+            Console.WriteLine("Password : ");
+            string userPassword = Console.ReadLine();
+            string nameUser = userName;
+
+            string userData = File.ReadAllText(nameUser+"data.txt");
+            
+            if(userName == userPassword || userPassword == "" || userName == ""){
+                Console.WriteLine("Wah, password dan username nya ngga cocok nih");
+            }else if (userData.Contains(userPassword) && userData.Contains(userName)){
+                Console.WriteLine(" ");
+                Console.WriteLine("Yeay anda berhasil login !");
+                Console.WriteLine("Selamat datang "+userName+" !");
+                Console.WriteLine(" ");
+                Console.WriteLine(userData);
+            }else{
+                Console.WriteLine("Wah, password dan username nya ngga cocok nih");
+                goto login;
+            }
+        }
+               
+    }
+}
