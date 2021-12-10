@@ -1,0 +1,62 @@
+using System;
+
+namespace lat_2_14
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            dataMahasiswa [] daftarMahasiswa = new dataMahasiswa[10];
+            string nama;
+            int nim;
+            string konsentrasi;
+            double ipk;
+            
+            for(int i = 0 ; i < daftarMahasiswa.Length; i++)
+            {
+                Console.WriteLine("Masukkan Data Mahasiswa({0})",i+1);
+                Console.WriteLine("Nama  : ");
+                nama = Console.ReadLine();
+                Console.WriteLine("Nim   :");
+                nim = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Konsentrasi  :");
+                konsentrasi = Console.ReadLine();
+                Console.WriteLine("IPK  :");
+                ipk = Convert.ToDouble(Console.ReadLine());
+                
+                daftarMahasiswa[i] = new dataMahasiswa(nama , nim , konsentrasi , ipk);
+            }
+            Console.Clear();
+
+            for(int i = 1; i < daftarMahasiswa.Length; i++)
+            {
+                daftarMahasiswa[i].printDataMahasiswa();
+            }
+        }
+        class dataMahasiswa
+        {
+            string Nama;
+            int Nim;
+            string Konsentrasi;
+            double Ipk;
+
+            public dataMahasiswa(string nama , int nim , string konsentrasi , double ipk)
+            {
+                Nama = nama;
+                Nim = nim;
+                Konsentrasi = konsentrasi;
+                Ipk = ipk;
+            }
+            public void printDataMahasiswa()
+            {
+                Console.WriteLine("=================================");
+                Console.WriteLine("Nama        : " + Nama);
+                Console.WriteLine("NIM         : " + Nim);
+                Console.WriteLine("Konsentrasi : " + Konsentrasi);
+                Console.WriteLine("IPK         :" + Ipk);
+                Console.WriteLine("================================");
+
+            }
+        }
+    }
+}
