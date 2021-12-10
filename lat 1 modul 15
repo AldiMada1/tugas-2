@@ -8,13 +8,13 @@ namespace Latihan_1
         static void Main(string[] args)
         {
             string path = @"D:\mada.txt ";
-            string bactfile = File.ReadAllText();
+            string bactfile = File.ReadAllText(path);
             Console.WriteLine(bactfile);
 
             string [] text = File.ReadAllLines(path);
 
-            float min = float.Parse(text(0));
-            float max = float.Parse(text(0));
+            float min = float.Parse(text[0]);
+            float max = float.Parse(text[0]);
             float avg = 0 ;
 
             foreach ( var item in text)
