@@ -1,0 +1,46 @@
+using System;
+using System.IO;
+
+namespace Latihan_1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string path = @"D:\mada.txt ";
+            string bactfile = File.ReadAllText();
+            Console.WriteLine(bactfile);
+
+            string [] text = File.ReadAllLines(path);
+
+            float min = float.Parse(text(0));
+            float max = float.Parse(text(0));
+            float avg = 0 ;
+
+            foreach ( var item in text)
+            {
+                float desimal;
+                if(float.TryParse(item , out desimal))
+                {
+                    if(min > desimal)
+                    {
+                        min = desimal;
+                    }
+                    if(max < desimal)
+                    {
+                        max = desimal;
+                    }
+                    avg += desimal;
+                    avg = avg / text.Length;
+
+                }
+            }
+
+            Console.WriteLine(" Nilai min adalah" + min);
+            Console.WriteLine(" Nilai max adalah" + max);
+            Console.WriteLine(" Nilai avg adalah" + avg);
+
+
+        }
+    }
+}
